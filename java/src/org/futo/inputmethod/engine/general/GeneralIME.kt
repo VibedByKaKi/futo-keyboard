@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Looper
 import android.util.Log
 import android.view.HapticFeedbackConstants
+import org.futo.inputmethod.latin.AudioAndHapticFeedbackManager
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -811,12 +812,12 @@ class GeneralIME(val helper: IMEHelper) : IMEInterface, WordLearner, SuggestionS
     }
 
     fun cursorStepped(steps: Int, overWords: Boolean) {
-        if(!settings.current.mVibrateOn) return
+        if (!settings.current.mVibrateOn) return
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            helper.keyboardSwitcher.mainKeyboardView?.performHapticFeedback(
-                if(overWords) HapticFeedbackConstants.KEYBOARD_TAP else HapticFeedbackConstants.TEXT_HANDLE_MOVE)
-        };
+        val view = helper.keyboardSwitcher.mainKeyboardView ?: return
+        // Use the same vibration path as key presses. TEXT_HANDLE_MOVE is not implemented on
+        // some ROMs (e.g. Xiaomi), while key-press vibration works reliably.
+        AudioAndHapticFeedbackManager.getInstance().performHapticFeedback(view, true)
     }
 
     override fun hasMoreTextToDelete(): Boolean =
