@@ -178,19 +178,23 @@ public class RecapitalizeStatus {
     /**
      * Remove leading/trailing whitespace from the considered string.
      */
+    private static boolean isTrimmableHorizontalWhitespace(final int codePoint) {
+        return codePoint == ' ' || codePoint == '\t';
+    }
+
     public void trim() {
         final int len = mStringBefore.length();
         int nonWhitespaceStart = 0;
         for (; nonWhitespaceStart < len;
                 nonWhitespaceStart = mStringBefore.offsetByCodePoints(nonWhitespaceStart, 1)) {
             final int codePoint = mStringBefore.codePointAt(nonWhitespaceStart);
-            if (!Character.isWhitespace(codePoint)) break;
+            if (!isTrimmableHorizontalWhitespace(codePoint)) break;
         }
         int nonWhitespaceEnd = len;
         for (; nonWhitespaceEnd > 0;
                 nonWhitespaceEnd = mStringBefore.offsetByCodePoints(nonWhitespaceEnd, -1)) {
             final int codePoint = mStringBefore.codePointBefore(nonWhitespaceEnd);
-            if (!Character.isWhitespace(codePoint)) break;
+            if (!isTrimmableHorizontalWhitespace(codePoint)) break;
         }
         // If nonWhitespaceStart >= nonWhitespaceEnd, that means the selection contained only
         // whitespace, so we leave it as is.

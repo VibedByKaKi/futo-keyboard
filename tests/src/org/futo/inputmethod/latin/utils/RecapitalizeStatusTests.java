@@ -59,6 +59,12 @@ public class RecapitalizeStatusTests {
         assertEquals("abcdefghij", status.getRecapitalizedString());
         assertEquals(33, status.getNewCursorStart());
         assertEquals(43, status.getNewCursorEnd());
+
+        status.start(30, 45, "\n\nabcdefghij", Locale.ENGLISH, SPACE);
+        status.trim();
+        assertEquals("\n\nabcdefghij", status.getRecapitalizedString());
+        assertEquals(30, status.getNewCursorStart());
+        assertEquals(45, status.getNewCursorEnd());
     }
 
     @Test
