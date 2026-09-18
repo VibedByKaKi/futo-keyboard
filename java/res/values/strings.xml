@@ -71,6 +71,9 @@
 
     <!-- Option to decide the auto correction threshold score -->
     <!-- Option to enable auto correction [CHAR LIMIT=20]-->
+    <string name="toggle_autocorrect">Toggle autocorrect</string>
+    <string name="toggle_autocorrect_enabled">Autocorrect enabled</string>
+    <string name="toggle_autocorrect_disabled">Autocorrect disabled</string>
     <string name="auto_correction">Auto-correction</string>
     <!-- Description for auto correction [CHAR LIMIT=65 (two lines) or 30 (fits on one line, preferable)] -->
     <string name="auto_correction_summary">Spacebar and punctuation automatically correct mistyped words</string>

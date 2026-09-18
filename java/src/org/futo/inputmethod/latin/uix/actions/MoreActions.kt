@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.sp
 import org.futo.inputmethod.latin.R
 import org.futo.inputmethod.latin.uix.Action
 import org.futo.inputmethod.latin.uix.ActionWindow
+import org.futo.inputmethod.latin.uix.actionIconRes
 import org.futo.inputmethod.latin.uix.LocalKeyboardScheme
 import org.futo.inputmethod.latin.uix.LocalManager
 import org.futo.inputmethod.latin.uix.getSettingBlocking
@@ -92,7 +93,7 @@ fun ActionItem(action: Action, modifier: Modifier = Modifier, dragIcon: Boolean 
                 ) {
                     Spacer(modifier = Modifier.weight(1.0f))
                     Icon(
-                        painterResource(id = action.icon),
+                        painterResource(id = actionIconRes(action)),
                         contentDescription = null,
                         modifier = Modifier.align(
                             CenterHorizontally
