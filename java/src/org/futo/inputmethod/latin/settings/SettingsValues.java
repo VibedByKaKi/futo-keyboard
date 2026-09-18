@@ -68,6 +68,7 @@ public class SettingsValues {
     public final boolean mIsRTL;
     // From preferences, in the same order as xml/prefs.xml:
     public final boolean mAutoCap;
+    public final boolean mAutoCapAfterPeriod;
     public final boolean mVibrateOn;
     public final boolean mSoundOn;
     public final boolean mKeyPreviewPopupOn;
@@ -161,6 +162,7 @@ public class SettingsValues {
 
         // Get the settings preferences
         mAutoCap = prefs.getBoolean(Settings.PREF_AUTO_CAP, true);
+        mAutoCapAfterPeriod = prefs.getBoolean(Settings.PREF_AUTO_CAP_AFTER_PERIOD, true);
         mVibrateOn = Settings.readVibrationEnabled(prefs, res);
         mSoundOn = Settings.readKeypressSoundEnabled(prefs, res);
         mKeyPreviewPopupOn = Settings.readKeyPreviewPopupEnabled(prefs, res);
