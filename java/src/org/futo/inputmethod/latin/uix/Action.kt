@@ -6,12 +6,17 @@ import android.net.Uri
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputConnection
+import android.content.SharedPreferences
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LayoutCoordinates
@@ -175,8 +180,40 @@ enum class PersistentStateInitialization {
     OnKeyboardLoad
 }
 
+@Composable
+private fun useSharedPrefBoolValue(key: String, default: Boolean): Boolean {
+    val context = LocalContext.current
+    val prefs = remember { PreferenceUtils.getDefaultSharedPreferences(context) }
+    val value = remember(key) { mutableStateOf(prefs.getBoolean(key, default)) }
+
+    DisposableEffect(key, prefs) {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, changedKey ->
+            if (changedKey == key) {
+                value.value = prefs.getBoolean(key, default)
+            }
+        }
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+        onDispose { prefs.unregisterOnSharedPreferenceChangeListener(listener) }
+    }
+
+    return value.value
+}
+
+@Composable
+fun actionIconRes(action: Action): Int {
+    val prefKey = action.activeStatePrefKey
+    val inactiveIcon = action.iconInactive
+    if (prefKey != null && inactiveIcon != null) {
+        val active = useSharedPrefBoolValue(prefKey, true)
+        return if (active) action.icon else inactiveIcon
+    }
+    return action.icon
+}
+
 data class Action(
     @DrawableRes val icon: Int,
+    @DrawableRes val iconInactive: Int? = null,
+    val activeStatePrefKey: String? = null,
     @StringRes val name: Int,
     val canShowKeyboard: Boolean = false,
     val keepScreenAwake: Boolean = false,

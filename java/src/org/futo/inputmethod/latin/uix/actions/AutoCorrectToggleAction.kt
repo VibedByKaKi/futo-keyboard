@@ -7,6 +7,8 @@ import org.futo.inputmethod.latin.uix.PreferenceUtils
 
 val AutoCorrectToggleAction = Action(
     icon = R.drawable.icon_spellcheck,
+    iconInactive = R.drawable.icon_spellcheck_off,
+    activeStatePrefKey = Settings.PREF_AUTO_CORRECTION,
     name = R.string.toggle_autocorrect,
     simplePressImpl = { manager, _ ->
         val context = manager.getContext()
