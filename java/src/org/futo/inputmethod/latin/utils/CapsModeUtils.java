@@ -100,6 +100,17 @@ public final class CapsModeUtils {
      * {@link TextUtils#CAP_MODE_CHARACTERS}, {@link TextUtils#CAP_MODE_WORDS}, and
      * {@link TextUtils#CAP_MODE_SENTENCES}.
      */
+    private static boolean isSingleLetterWordEndingAt(final CharSequence cs, final int lastIndex) {
+        if (lastIndex < 0 || !Character.isLetter(cs.charAt(lastIndex))) {
+            return false;
+        }
+        int start = lastIndex;
+        while (start > 0 && Character.isLetter(cs.charAt(start - 1))) {
+            --start;
+        }
+        return lastIndex == start;
+    }
+
     public static int getCapsMode(final CharSequence cs, final int reqModes,
             final SpacingAndPunctuations spacingAndPunctuations, final boolean hasSpaceBefore) {
         // Quick description of what we want to do:
@@ -222,8 +233,15 @@ public final class CapsModeUtils {
         // in which of these senses it's used.
         if (spacingAndPunctuations.isSentenceTerminator(c)
                 && !spacingAndPunctuations.isAbbreviationMarker(c)) {
-            return (TextUtils.CAP_MODE_CHARACTERS | TextUtils.CAP_MODE_WORDS
+            final int caps = (TextUtils.CAP_MODE_CHARACTERS | TextUtils.CAP_MODE_WORDS
                     | TextUtils.CAP_MODE_SENTENCES) & reqModes;
+            final int noSentenceCaps = (TextUtils.CAP_MODE_CHARACTERS | TextUtils.CAP_MODE_WORDS)
+                    & reqModes;
+            if (spacingAndPunctuations.isSentenceSeparator(c) && j > 0
+                    && isSingleLetterWordEndingAt(cs, j - 1)) {
+                return noSentenceCaps;
+            }
+            return caps;
         }
         // If we reach here, we know we have whitespace before the cursor and before that there
         // is something that either does not terminate the sentence, or a symbol preceded by the

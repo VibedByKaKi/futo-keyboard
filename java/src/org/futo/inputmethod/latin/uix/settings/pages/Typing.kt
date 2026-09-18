@@ -881,6 +881,15 @@ val TypingSettingsMenu = UserSettingsMenu(
             }
         ),
         userSettingToggleSharedPrefs(
+            title = R.string.auto_cap_after_period,
+            subtitle = R.string.auto_cap_after_period_summary,
+            key = Settings.PREF_AUTO_CAP_AFTER_PERIOD,
+            default = {true},
+            icon = {
+                Text(".", style = Typography.Body.MediumMl, color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.75f))
+            }
+        ),
+        userSettingToggleSharedPrefs(
             title = R.string.use_double_space_period,
             subtitle = R.string.use_double_space_period_summary,
             key = Settings.PREF_KEY_USE_DOUBLE_SPACE_PERIOD,

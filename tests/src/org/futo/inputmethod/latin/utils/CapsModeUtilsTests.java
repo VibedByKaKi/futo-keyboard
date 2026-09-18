@@ -172,5 +172,9 @@ public class CapsModeUtilsTests {
         allPathsForCaps("Word; ", c | w | s, sp, false);
         allPathsForCaps("Word;", c | w | s, sp, true);
         allPathsForCaps("Word;", c, sp, false);
+
+        // Single-letter words before a period should not trigger sentence caps (e.g. "i.e.")
+        allPathsForCaps("i. ", c | w, sp, false);
+        allPathsForCaps("Word. ", c | w | s, sp, false);
     }
 }

@@ -2338,8 +2338,12 @@ public final class InputLogic {
         // Warning: this depends on mSpaceState, which may not be the most current value. If
         // mSpaceState gets updated later, whoever called this may need to be told about it.
         try {
-            return mConnection.getCursorCapsMode(inputType, settingsValues.mSpacingAndPunctuations,
+            int capsMode = mConnection.getCursorCapsMode(inputType, settingsValues.mSpacingAndPunctuations,
                     SpaceState.PHANTOM == mSpaceState);
+            if (!settingsValues.mAutoCapAfterPeriod) {
+                capsMode &= ~android.text.TextUtils.CAP_MODE_SENTENCES;
+            }
+            return capsMode;
         } catch(StringIndexOutOfBoundsException ex) {
             BugViewerKt.throwIfDebug(ex);
             return Constants.TextUtils.CAP_MODE_OFF;

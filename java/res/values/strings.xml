@@ -48,6 +48,8 @@
     <string name="auto_cap">Auto-capitalization</string>
     <!-- Description for option to enable auto capitalization of sentences -->
     <string name="auto_cap_summary">Capitalize the first word of each sentence</string>
+    <string name="auto_cap_after_period">Capitalize after period</string>
+    <string name="auto_cap_after_period_summary">Capitalize the next letter after a sentence-ending period</string>
 
     <!-- Option to edit personal dictionary. [CHAR_LIMIT=30]-->
     <string name="edit_personal_dictionary">Personal dictionary</string>
