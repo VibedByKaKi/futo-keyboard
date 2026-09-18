@@ -9,30 +9,10 @@ concurrency:
   group: release-prerelease-dev
   cancel-in-progress: false
 
-permissions:
-  contents: write
-
 jobs:
   build:
     uses: ./.github/workflows/build-apk-shared.yml
+    permissions:
+      contents: write
     with:
-      upload_artifact: true
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download APK artifact
-        uses: actions/download-artifact@v6
-        with:
-          name: ${{ needs.build.outputs.apk_filename }}
-
-      - name: Publish GitHub prerelease
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: dev-build-${{ github.run_number }}
-          name: Dev build ${{ github.run_number }}
-          prerelease: true
-          generate_release_notes: true
-          files: ${{ needs.build.outputs.apk_filename }}
+      publish_prerelease: true

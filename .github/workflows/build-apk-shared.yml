@@ -7,6 +7,10 @@ on:
         description: Upload the APK as a workflow artifact
         type: boolean
         default: false
+      publish_prerelease:
+        description: Publish the APK as a GitHub prerelease in this job
+        type: boolean
+        default: false
     outputs:
       apk_filename:
         description: Filename of the built APK
@@ -77,3 +81,13 @@ jobs:
           path: ${{ steps.prepare.outputs.apk_filename }}
           archive: false
           retention-days: 14
+
+      - name: Publish GitHub prerelease
+        if: inputs.publish_prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: dev-build-${{ github.run_number }}
+          name: Dev build ${{ github.run_number }}
+          prerelease: true
+          generate_release_notes: true
+          files: ${{ steps.prepare.outputs.apk_filename }}
