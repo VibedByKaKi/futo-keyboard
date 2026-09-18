@@ -13,10 +13,10 @@ Latest CI artifacts from pushes to `dev` are also available under [Actions](http
 
 ## Exclusive fixes on `dev`
 
-| Fix | Upstream issue | Commit on `dev` |
+| Fix | Upstream issue | Commit |
 | --- | --- | --- |
 | Toggle autocorrect from the action bar, with on/off icon state | [futo-org/android-keyboard#159](https://github.com/futo-org/android-keyboard/issues/159) | [`0fdfcfd`](https://github.com/VibedByKaKi/futo-keyboard/commit/0fdfcfd79c8954890432ac437e2d6311e0e5695a) |
-| Optional setting to disable capitalization after a single-letter word and period (e.g. `i.`) | [futo-org/android-keyboard#1929](https://github.com/futo-org/android-keyboard/issues/1929) | [`bba150f`](https://github.com/VibedByKaKi/futo-keyboard/commit/bba150fdf9bbaf91dfb5e125e227a91e6b8f3e2a) |
+| Optional setting to disable capitalization after a single-letter word and period (e.g. `i.e.`) | [futo-org/android-keyboard#1929](https://github.com/futo-org/android-keyboard/issues/1929) | [`bba150f`](https://github.com/VibedByKaKi/futo-keyboard/commit/bba150fdf9bbaf91dfb5e125e227a91e6b8f3e2a) |
 | Spacebar cursor-move haptics on ROMs without `TEXT_HANDLE_MOVE` | [futo-org/android-keyboard#2008](https://github.com/futo-org/android-keyboard/issues/2008) | [`cfbc2ea`](https://github.com/VibedByKaKi/futo-keyboard/commit/cfbc2ea600a2fc28aa8865268834a82e1cc92b3a) |
 | Preserve newlines when recapitalizing selected text | [futo-org/android-keyboard#1748](https://github.com/futo-org/android-keyboard/issues/1748) | [`b0827c1`](https://github.com/VibedByKaKi/futo-keyboard/commit/b0827c17bb044ab8da5ccf8fd21eabbf01ac6700) |
 
