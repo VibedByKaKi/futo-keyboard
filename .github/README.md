@@ -4,14 +4,8 @@ Personal fork of [FUTO Keyboard](https://github.com/futo-org/android-keyboard) o
 
 The upstream project README is still in [README.md](../README.md) at the repository root.
 
-<p align="center">
-  <a href="https://github.com/VibedByKaKi/futo-keyboard/releases">
-    <img src="assets/get-it-on-github.png" alt="Get it on GitHub" height="80">
-  </a>
-  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fapp%2F%257B%2522id%2522%253A%2522org.futo.inputmethod.latin.unstable%2522%252C%2522url%2522%253A%2522https%253A%2F%2Fgithub.com%2FVibedByKaKi%2Ffuto-keyboard%2522%252C%2522author%2522%253A%2522VibedByKaKi%2522%252C%2522name%2522%253A%2522FUTO%2520Keyboard%2520%2528VibedByKaKi%2520fork%2529%2522%252C%2522preferredApkIndex%2522%253A0%252C%2522additionalSettings%2522%253A%2522%257B%255C%2522includePrereleases%255C%2522%253A%2520true%252C%2520%255C%2522fallbackToOlderReleases%255C%2522%253A%2520true%252C%2520%255C%2522apkFilterRegEx%255C%2522%253A%2520%255C%2522.%252A%255C%255C%255C%255C.apk%2524%255C%2522%257D%2522%257D">
-    <img src="assets/badge_obtainium.png" alt="Get it on Obtainium" height="80">
-  </a>
-</p>
+| [![](assets/get-it-on-github.png)](https://github.com/VibedByKaKi/futo-keyboard/releases) | [![](assets/badge_obtainium.png)](https://apps.obtainium.imranr.dev/redirect?r=obtainium%3A%2F%2Fapp%2F%257B%2522id%2522%253A%2522org.futo.inputmethod.latin.unstable%2522%252C%2522url%2522%253A%2522https%253A%2F%2Fgithub.com%2FVibedByKaKi%2Ffuto-keyboard%2522%252C%2522author%2522%253A%2522VibedByKaKi%2522%252C%2522name%2522%253A%2522FUTO%2520Keyboard%2520%2528VibedByKaKi%2520fork%2529%2522%252C%2522preferredApkIndex%2522%253A0%252C%2522additionalSettings%2522%253A%2522%257B%255C%2522includePrereleases%255C%2522%253A%2520true%252C%2520%255C%2522fallbackToOlderReleases%255C%2522%253A%2520true%252C%2520%255C%2522apkFilterRegEx%255C%2522%253A%2520%255C%2522.%252A%255C%255C%255C%255C.apk%2524%255C%2522%257D%2522%257D)
+| --- | ---
 
 Builds are unsigned unstable debug APKs published as GitHub prereleases from the **Release prerelease APK** workflow. In Obtainium, keep **Include pre-releases** on if you added the repo by hand.
 
