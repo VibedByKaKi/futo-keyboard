@@ -26,10 +26,10 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install Android SDK components
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
         run: |
           yes | sdkmanager --licenses > /dev/null
           sdkmanager --install \
@@ -41,6 +41,8 @@ jobs:
       - name: Build unstable debug APK
         run: ./gradlew assembleUnstableDebug --no-daemon --stacktrace
         env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
+          ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
           BRANCH_NAME: ${{ github.ref_name }}
 
       - name: Upload APK artifact
