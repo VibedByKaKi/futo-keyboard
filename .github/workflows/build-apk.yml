@@ -54,10 +54,12 @@ jobs:
           VERSION_CODE: ${{ github.run_number }}
           VERSION_NAME: ci-${{ github.sha }}
 
+      - name: Prepare APK for upload
+        run: cp build/outputs/apk/unstable/debug/*.apk keyboard-unstable-debug.apk
+
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: keyboard-unstable-debug-${{ github.sha }}
-          path: build/outputs/apk/unstable/debug/*.apk
-          if-no-files-found: error
+          path: keyboard-unstable-debug.apk
+          archive: false
           retention-days: 14
