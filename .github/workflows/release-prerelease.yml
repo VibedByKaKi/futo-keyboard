@@ -12,6 +12,7 @@ concurrency:
 jobs:
   build:
     uses: ./.github/workflows/build-apk-shared.yml
+    secrets: inherit
     permissions:
       contents: write
     with:

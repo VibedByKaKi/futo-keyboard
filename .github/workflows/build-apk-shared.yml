@@ -2,6 +2,15 @@ name: Build APK (reusable)
 
 on:
   workflow_call:
+    secrets:
+      SOUL_KEYSTORE_BASE64:
+        required: true
+      SOUL_KEY_ALIAS:
+        required: true
+      SOUL_KEYSTORE_PASSWORD:
+        required: true
+      SOUL_KEY_PASSWORD:
+        required: true
     inputs:
       upload_artifact:
         description: Upload the APK as a workflow artifact
@@ -55,6 +64,25 @@ jobs:
             "ndk;28.2.13676358" \
             "cmake;3.22.1"
 
+      - name: Prepare signing keystore
+        env:
+          SOUL_KEYSTORE_BASE64: ${{ secrets.SOUL_KEYSTORE_BASE64 }}
+          SOUL_KEY_ALIAS: ${{ secrets.SOUL_KEY_ALIAS }}
+          SOUL_KEYSTORE_PASSWORD: ${{ secrets.SOUL_KEYSTORE_PASSWORD }}
+          SOUL_KEY_PASSWORD: ${{ secrets.SOUL_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          mkdir -p keystore
+          printf '%s' "${SOUL_KEYSTORE_BASE64}" | base64 -d > keystore/release.keystore
+          chmod 600 keystore/release.keystore
+          {
+            printf 'storeFile=keystore/release.keystore\n'
+            printf 'storePassword=%s\n' "${SOUL_KEYSTORE_PASSWORD}"
+            printf 'keyAlias=%s\n' "${SOUL_KEY_ALIAS}"
+            printf 'keyPassword=%s\n' "${SOUL_KEY_PASSWORD}"
+          } > keystore.properties
+          chmod 600 keystore.properties
+
       - name: Build unstable debug APK
         run: ./gradlew assembleUnstableDebug --no-daemon --stacktrace
         env:
@@ -72,6 +100,10 @@ jobs:
           DEST="keyboard-unstable-debug-${BUILD_NUMBER}.apk"
           cp "$SRC" "$DEST"
           echo "apk_filename=${DEST}" >> "$GITHUB_OUTPUT"
+
+      - name: Remove signing material
+        if: always()
+        run: rm -f keystore/release.keystore keystore.properties
 
       - name: Upload APK artifact
         if: inputs.upload_artifact
